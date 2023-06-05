@@ -13,32 +13,32 @@ MapStruct 可用于 Java 9 及更高版本，本项目使用 Java 17 构建
 ```xml
 
 <build>
-  <plugins>
-    <plugin>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-maven-plugin</artifactId>
-    </plugin>
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-compiler-plugin</artifactId>
-      <configuration>
-        <annotationProcessorPaths>
-          <!-- Lombok 在编译时会通过这个插件生成代码 -->
-          <path>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-          </path>
-          <!-- MapStruct 在编译时会通过这个插件生成代码 -->
-          <path>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
-            <version>${org.mapstruct.version}</version>
-          </path>
-        </annotationProcessorPaths>
-      </configuration>
-    </plugin>
-  </plugins>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <annotationProcessorPaths>
+                    <!-- Lombok 在编译时会通过这个插件生成代码 -->
+                    <path>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                        <version>${lombok.version}</version>
+                    </path>
+                    <!-- MapStruct 在编译时会通过这个插件生成代码 -->
+                    <path>
+                        <groupId>org.mapstruct</groupId>
+                        <artifactId>mapstruct-processor</artifactId>
+                        <version>${org.mapstruct.version}</version>
+                    </path>
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
+    </plugins>
 </build>
 ```
 
@@ -151,13 +151,13 @@ public class CarMapperImpl implements CarMapper {
 @Mapper
 public interface CarMapper {
 
-  @Mapping(target = "manufacturer", source = "make")
-  @Mapping(target = "seatCount", source = "numberOfSeats")
-  CarDto carToCarDto(Car car);
+    @Mapping(target = "manufacturer", source = "make")
+    @Mapping(target = "seatCount", source = "numberOfSeats")
+    CarDto carToCarDto(Car car);
 
-  default PersonDto personToPersonDto(Person person) {
-    // 手写映射逻辑
-  }
+    default PersonDto personToPersonDto(Person person) {
+        // 手写映射逻辑
+    }
 }
 ```
 
@@ -205,10 +205,10 @@ public interface AddressMapper {
 @Mapper
 public interface CustomerMapper {
 
-  @Mapping(target = "name", source = "record.name")
-  @Mapping(target = ".", source = "record")
-  @Mapping(target = ".", source = "account")
-  Customer customerDtoToCustomer(CustomerDto customerDto);
+    @Mapping(target = "name", source = "record.name")
+    @Mapping(target = ".", source = "record")
+    @Mapping(target = ".", source = "account")
+    Customer customerDtoToCustomer(CustomerDto customerDto);
 }
 ```
 
@@ -229,7 +229,7 @@ public interface CustomerMapper {
 @Mapper
 public interface CarMapper {
 
-  void updateCarFromDto(CarDto carDto, @MappingTarget Car car);
+    void updateCarFromDto(CarDto carDto, @MappingTarget Car car);
 }
 ```
 
@@ -265,17 +265,17 @@ public interface CarMapper {
 ```java
 public class Customer {
 
-  private Long id;
-  private String name;
+    private Long id;
+    private String name;
 
-  //getters and setter omitted for brevity
+    //getters and setter omitted for brevity
 }
 
 @Mapper
 public interface CustomerMapper {
 
-  @Mapping(target = "name", source = "customerName")
-  Customer toCustomer(Map<String, String> map);
+    @Mapping(target = "name", source = "customerName")
+    Customer toCustomer(Map<String, String> map);
 
 }
 ```
@@ -286,17 +286,17 @@ public interface CustomerMapper {
 // GENERATED CODE
 public class CustomerMapperImpl implements CustomerMapper {
 
-  @Override
-  public Customer toCustomer(Map<String, String> map) {
-    // ...
-    if (map.containsKey("id")) {
-      customer.setId(Integer.parseInt(map.get("id")));
+    @Override
+    public Customer toCustomer(Map<String, String> map) {
+        // ...
+        if (map.containsKey("id")) {
+            customer.setId(Integer.parseInt(map.get("id")));
+        }
+        if (map.containsKey("customerName")) {
+            customer.setName(map.get("customerName"));
+        }
+        // ...
     }
-    if (map.containsKey("customerName")) {
-      customer.setName(map.get("customerName"));
-    }
-    // ...
-  }
 }
 ```
 
@@ -322,11 +322,11 @@ int)和Integer#parseInt(String)来透明地执行转换。
 @Mapper
 public interface CarMapper {
 
-  @Mapping(source = "price", numberFormat = "$#.00")
-  CarDto carToCarDto(Car car);
+    @Mapping(source = "price", numberFormat = "$#.00")
+    CarDto carToCarDto(Car car);
 
-  @IterableMapping(numberFormat = "$#.00")
-  List<String> prices(List<Integer> prices);
+    @IterableMapping(numberFormat = "$#.00")
+    List<String> prices(List<Integer> prices);
 }
 ```
 
@@ -345,14 +345,14 @@ public interface CarMapper {
 @Mapper
 public interface FishTankMapperWithDocument {
 
-  @Mapping(target = "fish.kind", source = "fish.type")
-  @Mapping(target = "fish.name", expression = "java(\"Jaws\")")
-  @Mapping(target = "plant", ignore = true)
-  @Mapping(target = "ornament", ignore = true)
-  @Mapping(target = "material", ignore = true)
-  @Mapping(target = "quality.document", source = "quality.report")
-  @Mapping(target = "quality.document.organisation.name", constant = "NoIdeaInc")
-  FishTankWithNestedDocumentDto map(FishTank source);
+    @Mapping(target = "fish.kind", source = "fish.type")
+    @Mapping(target = "fish.name", expression = "java(\"Jaws\")")
+    @Mapping(target = "plant", ignore = true)
+    @Mapping(target = "ornament", ignore = true)
+    @Mapping(target = "material", ignore = true)
+    @Mapping(target = "quality.document", source = "quality.report")
+    @Mapping(target = "quality.document.organisation.name", constant = "NoIdeaInc")
+    FishTankWithNestedDocumentDto map(FishTank source);
 
 }
 ```
@@ -384,40 +384,40 @@ JDK 1.8 以后，接口里可以有静态方法和方法体了，
 
 ```java
 public class FishTank {
-  Fish fish;
-  String material;
-  Quality quality;
-  int length;
-  int width;
-  int height;
+    Fish fish;
+    String material;
+    Quality quality;
+    int length;
+    int width;
+    int height;
 }
 
 public class FishTankWithVolumeDto {
-  FishDto fish;
-  MaterialDto material;
-  QualityDto quality;
-  VolumeDto volume;
+    FishDto fish;
+    MaterialDto material;
+    QualityDto quality;
+    VolumeDto volume;
 }
 
 public class VolumeDto {
-  int volume;
-  String description;
+    int volume;
+    String description;
 }
 
 @Mapper
 public abstract class FishTankMapperWithVolume {
 
-  @Mapping(target = "fish.kind", source = "source.fish.type")
-  @Mapping(target = "material.materialType", source = "source.material")
-  @Mapping(target = "quality.document", source = "source.quality.report")
-  @Mapping(target = "volume", source = "source")
-  abstract FishTankWithVolumeDto map(FishTank source);
+    @Mapping(target = "fish.kind", source = "source.fish.type")
+    @Mapping(target = "material.materialType", source = "source.material")
+    @Mapping(target = "quality.document", source = "source.quality.report")
+    @Mapping(target = "volume", source = "source")
+    abstract FishTankWithVolumeDto map(FishTank source);
 
-  VolumeDto mapVolume(FishTank source) {
-    int volume = source.length * source.width * source.height;
-    String desc = volume < 100 ? "Small" : "Large";
-    return new VolumeDto(volume, desc);
-  }
+    VolumeDto mapVolume(FishTank source) {
+        int volume = source.length * source.width * source.height;
+        String desc = volume < 100 ? "Small" : "Large";
+        return new VolumeDto(volume, desc);
+    }
 }
 ```
 
@@ -430,15 +430,14 @@ public abstract class FishTankMapperWithVolume {
 示例代码：
 
 ```java
-
 @Mapper
 public interface CarMapper {
 
-  Set<String> integerSetToStringSet(Set<Integer> integers);
+    Set<String> integerSetToStringSet(Set<Integer> integers);
 
-  List<CarDto> carsToCarDtos(List<Car> cars);
+    List<CarDto> carsToCarDtos(List<Car> cars);
 
-  CarDto carToCarDto(Car car);
+    CarDto carToCarDto(Car car);
 }
 ```
 
@@ -485,12 +484,30 @@ public List<CarDto> carsToCarDtos(List<Car> cars){
 
 ```java
 public class Car {
-  List<Person> passengers;
+    List<Person> passengers;
 }
 
 public class CarDto {
-  List<PersonDto> passengers
+    List<PersonDto> passengers;
 }
+
+@Mapper
+public interface CarMapper {
+
+    PersonDto map(Person person);
+
+    List<PersonDto> map(List<Person> persons);
+
+    CarDto map(Car car);
+
+}
+```
+
+在 `List<CarDto> carsToCarDtos(List<Car> cars)` 映射方法中，MapStruct生成的代码：
+
+```java
+//GENERATED CODE
+carDto.setPassengers(personsToPersonDtos(car.getPassengers()));
 ```
 
 # 怎么映射 Map
