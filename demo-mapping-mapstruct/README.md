@@ -10,6 +10,10 @@ MapStruct 可用于 Java 9 及更高版本，本项目使用 Java 17 构建
 
 当同时使用 Lombok 和 MapStruct 时，请在 pom.xml 中添加
 
+请注意，在`build.plugins.plugin.configuration.annotationProcessorPaths.path`
+中，指定的版本是必须要写的。默认情况下，Maven不会从父模块继承插件版本号。你需要确保你的模块或者父模块的`properties`
+标签指定了lombok版本，此时你可以省略`<version>${lombok.version}</version>`
+
 ```xml
 
 <build>

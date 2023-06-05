@@ -7,6 +7,9 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <modules>
+        <module>demo-mapping-mapstruct</module>
+        <module>demo-spring-statemachine</module>
+        <module>demo-mq-kafka</module>
         <module>demo-rbac-shiro</module>
     </modules>
 
@@ -24,6 +27,7 @@
         <mysql.version>8.0.31</mysql.version>
         <hutool.version>5.8.16</hutool.version>
         <guava.version>31.0.1-jre</guava.version>
+        <lombok.version>1.18.26</lombok.version>
     </properties>
 
     <dependencies>
@@ -78,6 +82,11 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
