@@ -6,7 +6,7 @@ README
 
 MapStruct 可用于 Java 9 及更高版本，本项目使用 Java 17 构建
 
-基于 MapStruct 的示例代码在 com.orion.demo.mapping.mapstruct.mapping 的 CarMapperTest 类中
+基于 MapStruct 的示例代码在 `com.orion.demo.mapping.mapstruct.mapping` 的 `CarMapperTest` 类中
 
 当同时使用 Lombok 和 MapStruct 时，请在 pom.xml 中添加
 
@@ -46,7 +46,7 @@ MapStruct 可用于 Java 9 及更高版本，本项目使用 Java 17 构建
 </build>
 ```
 
-同时，springboot 项目使用 MapStruct 写的接口时，如果要用依赖注入的方式使用接口的实现类，MapStruct的映射接口的 `@Mapper`
+同时，SpringBoot 项目使用 MapStruct 写的接口时，如果要用依赖注入的方式使用接口的实现类，MapStruct的映射接口的 `@Mapper`
 注解应改为 `@Mapper(componentModel = "spring")`
 
 如果还是出错，运行一次 maven 的 clean
@@ -182,7 +182,7 @@ public interface AddressMapper {
 ```
 
 - 如果多个源对象定义同名属性，则必须使用 `@Mapping` 注释如图所示 `description` 示例中的属性。 如果未解决此类歧义，则会引发错误。
-- 当有一个源对象只包含一次的属性时，MapStruct 会自动选择将其映射到目标对象中相应的属性。在这种情况下，不需要使用 @Mapping
+- 当有一个源对象只包含一次的属性时，MapStruct 会自动选择将其映射到目标对象中相应的属性。在这种情况下，不需要使用 `@Mapping`
   注释来明确指定它要被映射到哪个属性上，因为 MapStruct 可以自动确定。
 
 直接引用方法参数也是可以的：
@@ -198,11 +198,11 @@ public interface AddressMapper {
 }
 ```
 
-在上面示例，参数 hn 直接映射到 houseNumber
+在上面示例，参数 `hn` 直接映射到 `houseNumber`
 
 # 怎么把 source 的几个 bean 属性映射到目标的同名属性上
 
-如果你不想显式地命名嵌套源bean中的所有属性，你可以使用.作为目标。 这将告诉MapStruct将每个属性从源bean映射到目标对象。
+如果你不想显式地命名嵌套源 bean 中的所有属性，你可以使用`.`作为目标。 这将告诉 MapStruct 将每个属性从源 bean 映射到目标对象。
 
 ```java
 
@@ -240,7 +240,7 @@ public interface CarMapper {
 要注意的是，可以通过 `@Mapper(collectionMappingStrategy = CollectionMappingStrategy.下面枚举的某个策略)`
 来修改映射策略（默认 `ACCESSOR_ONLY` ）
 
-无论选择何种 CollectionMappingStrategy 策略，都会将源集合或映射中的元素映射至目标集合或映射属性中
+无论选择何种 `CollectionMappingStrategy 策略`，都会将源集合或映射中的元素映射至目标集合或映射属性中
 
 | CollectionMappingStrategy | 更新现有目标Bean且目标属性不为空时的映射行为                 |
 |---------------------------|------------------------------------------|
@@ -249,15 +249,15 @@ public interface CarMapper {
 | TARGET_IMMUTABLE          | 不清空原有值，而是直接覆盖原有值（和ACCESSOR_ONLY效果一样）     |
 
 需要注意的是，在使用 `CollectionMappingStrategy.ADDER_PREFERRED` 时，若目标属性不支持添加器方法（如 `addAll()`
-方法），则不会有任何值被填充至目标属性中，此时可以选择使用另一种策略，或者手动为目标Bean创建新的实例，再进行赋值操作。
+方法），则不会有任何值被填充至目标属性中，此时可以选择使用另一种策略，或者手动为目标 Bean 创建新的实例，再进行赋值操作。
 
 # MapStruct 认得 @Builder 吗
 
 如果某个类型存在构建器，则该构建器将用于映射
 
-可通过@Builder#disableBuilder关闭生成器检测。MapStruct将在禁用构建器的情况下使用常规getter/setter。
+可通过 `@Builder#disableBuilder` 关闭生成器检测。MapStruct 将在禁用构建器的情况下使用常规 getter/setter。
 
-如果有多个构建方法，MapStruct将查找名为build的方法（如果存在） 则将使用该值，否则将产生编译错误
+如果有多个构建方法，MapStruct 将查找名为 `build` 的方法（如果存在） 则将使用该值，否则将产生编译错误
 
 # 可不可以通过 Map 转 Bean？
 
@@ -284,7 +284,7 @@ public interface CustomerMapper {
 }
 ```
 
-编译生成的映射器用于将map映射到bean，大概长这样：
+编译生成的映射器用于将 map 映射到 bean，大概长这样：
 
 ```java
 // GENERATED CODE
@@ -308,18 +308,21 @@ public class CustomerMapperImpl implements CustomerMapper {
 
 ## 隐式类型转换
 
-MapStruct在许多情况下自动处理类型转换。例如，如果一个属性在源bean中的类型是int，而在目标bean中的类型是String，那么生成的代码将分别通过调用String#valueOf(
-int)和Integer#parseInt(String)来透明地执行转换。
+MapStruct在许多情况下自动处理类型转换。例如，如果一个属性在源 bean 中的类型是 int ，而在目标 bean 中的类型是
+String，那么生成的代码将分别通过调用 `String#valueOf(
+int)` 和 `Integer#parseInt(String)` 来透明地执行转换。
 
 当前自动应用以下转换：
 
-- 在所有Java原始数据类型和它们对应的包装器类型之间，例如int~Integer、boolean~
-  Boolean等。生成的代码是null感知的，即当将包装器类型转换成相应的原语类型时，将执行null检查。
-- 在所有Java基元类型和包装器类型之间，例如int和long或byte和Integer之间。
-- 在所有Java基元（包括它们的包装器）和String之间，例如int和String或Boolean和String之间。可以指定java.text.DecimalFormat所理解的格式字符串。
+- 在所有Java原始数据类型和它们对应的包装器类型之间，例如 `Integer -> int`、`Boolean -> boolean` 等。生成的代码是 null
+  感知的，即当将包装器类型转换成相应的原语类型时，将执行 null 检查。
+- 在所有Java基元类型和包装器类型之间，例如 `int 和 long` 或 `byte 和 Integer` 之间。
+- 在所有Java基元（包括它们的包装器）和 String 之间，例如 `int 和 String` 或 `Boolean 和 String`
+  之间。可以指定 `java.text.DecimalFormat` 所理解的格式字符串。
 
 当然，可以自定义转换格式，
-下面是一个从int到String的自定义格式转换的示例，更多转换细节请参照 [5.1.隐式类型转换](https://mapstruct.org/documentation/stable/reference/html/#implicit-type-conversions)
+下面是一个从 int 到 String
+的自定义格式转换的示例，更多转换细节请参照 [5.1.隐式类型转换](https://mapstruct.org/documentation/stable/reference/html/#implicit-type-conversions)
 
 ```java
 
@@ -338,8 +341,9 @@ public interface CarMapper {
 
 相同名称，自动映射
 
-对应 `FishDto fishToFishDto(Fish fish)` MapStruct 不知道 Fish的kind 映射 FishDto的type 。
-因此，这可以在映射规则中解决：@Mapping(target="fish.kind", source="fish.type"). 这告诉MapStruct在该级别查找名称kind，并将其映射到type。
+对应 `FishDto fishToFishDto(Fish fish)` MapStruct 不知道 `Fish` 的 `kind` 映射 `FishDto` 的 `type` 。
+因此，这可以在映射规则中解决：`@Mapping(target="fish.kind", source="fish.type")`，这告诉 MapStruct 在该级别查找名称 `kind`
+，并将其映射到`type`。
 > **在 MapStruct 中，@Mapping 的 target 和 source 字段会同时支持嵌套属性路径的写法。这里使用的 fish.kind 和 fish.type
 > 就是嵌套属性路径中的两个属性名，它们实际上都只是一个临时变量名称，只要保证 target 和 source 字段所指向的对象、类和属性都是正确的即可。
 **
@@ -368,12 +372,12 @@ public interface FishTankMapperWithDocument {
    ，以减少代码量并提高程序性能。
 
 2. `expression`: 该注解用于填充目标对象的属性使用 Java
-   表达式计算返回值。例如，`@Mapping(target = "fish.name", expression = "java(\"Jaws\")")` 表示将字符串常量 "Jaws"
-   赋值给目标对象中的名为 name 的 property 属性。
+   表达式计算返回值。例如，`@Mapping(target = "fish.name", expression = "java(\"Jaws\")")` 表示将字符串常量 `"Jaws"`
+   赋值给目标对象中的名为 `name` 的 `property` 属性。
 
 3. `constant`:
    这个注解指定应为目标属性分配一个常数值，不考虑源实例的任何内容。具有此注释情况下目标属性的类型必须与常量类型匹配，如果不匹配则会导致编译错误。例如，`@Mapping(target = "quality.document.organisation.name", constant = "NoIdeaInc" )`
-   表示将值 "NoIdeaInc" 赋值给目标对象中的 quality.document.organisation.name 属性。
+   表示将值 `"NoIdeaInc"` 赋值给目标对象中的 `quality.document.organisation.name` 属性。
 
 总之，这些注解都非常有用，在编写映射类时可以根据需要自由地使用它们来简化代码和提高工作效率。
 
@@ -382,7 +386,7 @@ public interface FishTankMapperWithDocument {
 前置条件：Java 8+
 
 JDK 1.8 以后，接口里可以有静态方法和方法体了，
-同时，接口允许包含具体实现的方法，该方法称为"默认方法"，默认方法使用 default 关键字修饰。
+同时，接口允许包含具体实现的方法，该方法称为"默认方法"，默认方法使用 `default` 关键字修饰。
 
 下面的示例代码演示了从 `FishTank` 到 `VolumeDto` 的自定义映射：
 
@@ -434,6 +438,7 @@ public abstract class FishTankMapperWithVolume {
 示例代码：
 
 ```java
+
 @Mapper
 public interface CarMapper {
 
