@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/user_center
+    username: root
+    password: 123456
+
+knife4j:
+  enable: true
+  openapi:
+    title: demo-orm-bean-searcher
+    description: "Bean Searcher Demo"
+    email: xiaoymin@foxmail.com
+    concat: OrionLi
+    url: https://docs.xiaominfo.com
+    version: v4.0
+    license: Apache 2.0
+    license-url: https://stackoverflow.com/
+    terms-of-service-url: https://stackoverflow.com/
+    group:
+      test1:
+        group-name: 分组名称
+        api-rule: package
+        api-rule-resources:
+          - com.orion.demo.orm.beansearcher.controller
+
+logging:
+  level:
+    cn.zhxu.bs: DEBUG
