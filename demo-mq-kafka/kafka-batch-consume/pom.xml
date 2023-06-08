@@ -7,8 +7,8 @@
         <artifactId>demo-mq-kafka</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>kafka-quick-start</artifactId>
+    <artifactId>kafka-batch-consume</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>kafka-quick-start</name>
-    <description>kafka-quick-start</description>
+    <name>kafka-batch-consume</name>
+    <description>kafka-batch-consume</description>
 </project>

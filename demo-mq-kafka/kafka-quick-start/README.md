@@ -4,6 +4,9 @@
 
 观看顺序：application.yml -> Message类 -> 提供者 -> 消费者`Demo01Consumer` -> 消费者`Demo01AConsumer`
 
+如果复制了本项目的 yml 配置，记得把 `spring.kafka.consumer.properties.spring.json.trusted.packages` 配了
+> 原因是前面配置的 `JsonDeserializer` 在反序列化消息时，考虑到安全性，只反序列化成信任的 Message 类，所以得配置一下
+
 ## Demo01Producer 类的两个方法最后都返回了什么
 
 ### 理解回调函数

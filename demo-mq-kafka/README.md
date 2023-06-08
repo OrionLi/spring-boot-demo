@@ -30,6 +30,9 @@ kafka-console-producer.bat --broker-list localhost:9092 --topic test
 kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test [--from-beginning]
 ```
 
+另外，如果复制了本项目的 yml 配置，记得把 `spring.kafka.consumer.properties.spring.json.trusted.packages` 配了
+> 原因是前面配置的 `JsonDeserializer` 在反序列化消息时，考虑到安全性，只反序列化成信任的 Message 类，所以得配置一下
+
 # 附录(按教程操作无报错可跳过)
 
 下面是本人的 `zookeeper.properties` 配置
