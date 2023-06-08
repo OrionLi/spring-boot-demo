@@ -1,6 +1,6 @@
-package com.orion.demo.mq.kafka.consumer;
+package com.orion.demo.mq.kafka.quickstart.consumer;
 
-import com.orion.demo.mq.kafka.message.Demo01Message;
+import com.orion.demo.mq.kafka.quickstart.message.Demo01Message;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;

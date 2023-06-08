@@ -1,4 +1,4 @@
-package com.orion.demo.mq.kafka.message;
+package com.orion.demo.mq.kafka.quickstart.message;
 
 import lombok.Data;
 

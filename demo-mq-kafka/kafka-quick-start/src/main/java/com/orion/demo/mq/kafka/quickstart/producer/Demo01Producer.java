@@ -1,6 +1,6 @@
-package com.orion.demo.mq.kafka.producer;
+package com.orion.demo.mq.kafka.quickstart.producer;
 
-import com.orion.demo.mq.kafka.message.Demo01Message;
+import com.orion.demo.mq.kafka.quickstart.message.Demo01Message;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;

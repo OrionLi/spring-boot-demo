@@ -1,5 +1,4 @@
-package com.orion.demo.mq.kafka.producer;
-
+package com.orion.demo.mq.kafka.quickstart.producer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -39,7 +38,7 @@ public class Demo01ProducerTest {
 
     /**
      * 再执行这个，不要关闭 #testSyncSend() 单元测试方法，
-     * 因为我们要模拟每个消费者集群，都有多个 Consumer 节点。
+     * 因为我们要模拟每个消费者集群都有多个消费者节点。
      */
     @Test
     public void testASyncSend() throws InterruptedException {
