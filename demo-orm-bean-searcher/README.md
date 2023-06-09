@@ -15,6 +15,8 @@
 
 接口文档：[http://localhost:8080/doc.html](http://localhost:8080/doc.html)
 
+推荐测试 tag 字段 (数据较为多样)
+
 # 学习 Bean Searcher
 
 官方文档写挺好的，就是排序有点乱
