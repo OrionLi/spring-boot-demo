@@ -1,6 +1,6 @@
 package com.orion.demo.mq.kafka.consumptionretry.producer;
 
-import com.orion.demo.mq.kafka.consumptionretry.message.Demo04Message;
+import com.orion.demo.mq.kafka.consumptionretry.message.Demo05Message;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
@@ -14,17 +14,17 @@ import java.util.concurrent.ExecutionException;
  * @description
  */
 @Component
-public class Demo04Producer {
+public class Demo05Producer {
 
     @Resource
     private KafkaTemplate<Object, Object> kafkaTemplate;
 
     public SendResult syncSend(Integer id) throws ExecutionException, InterruptedException {
-        // 创建 Demo04Message 消息
-        Demo04Message message = new Demo04Message();
+        // 创建 Demo05Message 消息
+        Demo05Message message = new Demo05Message();
         message.setId(id);
         // 同步发送消息
-        return this.kafkaTemplate.send(Demo04Message.TOPIC, message).get();
+        return this.kafkaTemplate.send(Demo05Message.TOPIC, message).get();
     }
 
 }

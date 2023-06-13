@@ -16,10 +16,10 @@ import java.util.concurrent.ExecutionException;
  */
 @Slf4j
 @SpringBootTest
-class Demo04ProducerTest {
+class Demo05ProducerTest {
 
     @Autowired
-    private Demo04Producer producer;
+    private Demo05Producer producer;
 
     @Test
     void testSyncSend() throws ExecutionException, InterruptedException {
