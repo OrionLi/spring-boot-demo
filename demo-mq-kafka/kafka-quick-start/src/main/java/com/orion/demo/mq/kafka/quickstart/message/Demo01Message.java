@@ -16,4 +16,9 @@ public class Demo01Message {
      * 编号
      */
     private Integer id;
+
+    /**
+     * 正文
+     */
+    private String body;
 }

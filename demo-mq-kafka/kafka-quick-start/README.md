@@ -138,6 +138,10 @@ public class Main {
 的异步操作机制，能够非常方便地实现后台异步执行任务，并且在任务完成时回调相应的方法，这样就避免了阻塞主线程。同时，在不需要使用到回调功能的情况下，我们也可以直接使用 `Future`
 接口，并通过它来实现简单的异步操作。
 
+### 更多 Kafka 异步调用示例
+
+在 `com.orion.demo.mq.kafka.quickstart.KafkaQuickStartApplicationTests` 处，有一个稍显完整的 Kafka 异步调用示例
+
 ## 消息 Message 是怎么序列化的。
 
 在序列化时，我们使用了 JsonSerializer 序列化 Message 消息对象，它会在 Kafka 消息 Headers 的 `__TypeId__` 上，值为 Message

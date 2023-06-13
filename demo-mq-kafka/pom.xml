@@ -18,6 +18,9 @@
         <module>kafka-batch-produce</module>
         <module>kafka-batch-consume</module>
         <module>kafka-timed-message</module>
+        <module>kafka-consumption-retry</module>
+        <module>kafka-broadcast-consumption</module>
+        <module>kafka-transaction</module>
     </modules>
 
     <properties>

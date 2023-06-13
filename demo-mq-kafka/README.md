@@ -1,4 +1,8 @@
-# Kafka
+# Demo 04 定时消息
+
+摘要: 部分示例及文字原创出处 [Spring Boot 消息队列 Kafka 入门](http://www.iocoder.cn/Spring-Boot/Kafka/)
+
+# Kafka 安装
 
 ## [Windows 安装 Kafka](https://blog.csdn.net/weixin_44623450/article/details/126481448)
 
