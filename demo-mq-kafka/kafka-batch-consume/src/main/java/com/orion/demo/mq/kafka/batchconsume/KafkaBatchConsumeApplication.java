@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class KafkaBatchConsumeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(KafkaBatchConsumeApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(KafkaBatchConsumeApplication.class, args);
+    }
 
 }

@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class Demo03Message {
 
-    public static final String TOPIC = "DEMO_012";
+    public static final String TOPIC = "DEMO_03";
 
     /**
      * 编号

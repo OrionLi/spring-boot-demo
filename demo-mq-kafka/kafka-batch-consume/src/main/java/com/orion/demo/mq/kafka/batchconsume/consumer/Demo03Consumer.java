@@ -18,7 +18,7 @@ import java.util.List;
 public class Demo03Consumer {
 
     @KafkaListener(topics = Demo03Message.TOPIC,
-            groupId = "demo02-consumer-group-" + Demo03Message.TOPIC)
+            groupId = "demo03-consumer-group-" + Demo03Message.TOPIC)
     public void onMessage(List<Demo03Message> messages) {
         log.info("[onMessage][线程编号:{} 消息数量：{}]", Thread.currentThread().getId(), messages.size());
     }
