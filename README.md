@@ -1,6 +1,6 @@
 # Spring Boot Demo
 
-<img src="https://img.shields.io/badge/JDK-17.0.7-orange"> <img src="https://img.shields.io/badge/Spring%20Boot-2.7.12-brightgreen"> <img src="https://img.shields.io/badge/author-OrionLi-blue">
+<img src="https://img.shields.io/badge/JDK-17.0.7-orange"> <img src="https://img.shields.io/badge/Spring%20Boot-3.1.0-brightgreen"> <img src="https://img.shields.io/badge/author-OrionLi-blue">
 
 ## 项目介绍
 
