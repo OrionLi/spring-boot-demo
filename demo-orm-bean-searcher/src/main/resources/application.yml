@@ -7,22 +7,8 @@ spring:
 
 knife4j:
   enable: true
-  openapi:
-    title: demo-orm-bean-searcher
-    description: "Bean Searcher Demo"
-    email: xiaoymin@foxmail.com
-    concat: OrionLi
-    url: https://docs.xiaominfo.com
-    version: v4.0
-    license: Apache 2.0
-    license-url: https://stackoverflow.com/
-    terms-of-service-url: https://stackoverflow.com/
-    group:
-      test1:
-        group-name: 分组名称
-        api-rule: package
-        api-rule-resources:
-          - com.orion.demo.orm.beansearcher.controller
+  setting:
+    language: zh_cn
 
 logging:
   level:

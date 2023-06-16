@@ -6,10 +6,10 @@ import com.orion.demo.mapping.mapstruct.pojo.domain.Person;
 import com.orion.demo.mapping.mapstruct.pojo.dto.CarDto;
 import com.orion.demo.mapping.mapstruct.pojo.dto.PersonDto;
 import com.orion.demo.mapping.mapstruct.pojo.emum.Category;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.support.SendResult;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 
@@ -27,10 +27,14 @@ public class Demo01ProducerTest {
      * 先执行这个
      */
     @Test
-    public void testSyncSend() throws ExecutionException, InterruptedException {
+    public void testSyncSend() throws InterruptedException {
         int id = (int) (System.currentTimeMillis() / 1000);
-        SendResult result = this.producer.syncSend(id);
-        log.info("[testSyncSend][发送编号：[{}] 发送结果：[{}]]", id, result);
+        try {
+            SendResult result = producer.syncSend(id);
+            log.info("[testSyncSend][发送编号：[{}] 发送结果：[{}]]", id, result);
+        } catch (ExecutionException | InterruptedException e) {
+            log.error("[testASyncSend][发送编号：[{}] 发送异常]]", id, e);
+        }
 
         // 阻塞等待，保证消费
         new CountDownLatch(1).await();
@@ -43,18 +47,13 @@ public class Demo01ProducerTest {
     @Test
     public void testASyncSend() throws InterruptedException {
         int id = (int) (System.currentTimeMillis() / 1000);
-        this.producer.asyncSend(id).addCallback(new ListenableFutureCallback<>() {
-
-            @Override
-            public void onFailure(Throwable e) {
-                Demo01ProducerTest.log.info("[testASyncSend][发送编号：[{}] 发送异常]]", id, e);
+        CompletableFuture<SendResult<Object, Object>> future = producer.asyncSend(id);
+        future.whenComplete((result, ex) -> {
+            if (ex == null) {
+                log.info("[testASyncSend][发送编号：[{}] 发送结果：[{}]]", id, result);
+            } else {
+                log.error("[testASyncSend][发送编号：[{}] 发送异常]]", id, ex);
             }
-
-            @Override
-            public void onSuccess(SendResult<Object, Object> result) {
-                Demo01ProducerTest.log.info("[testASyncSend][发送编号：[{}] 发送成功，结果为：[{}]]", id, result);
-            }
-
         });
 
         // 阻塞等待，保证消费

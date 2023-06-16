@@ -6,10 +6,12 @@ import cn.zhxu.bs.operator.Contain;
 import cn.zhxu.bs.operator.Equal;
 import cn.zhxu.bs.util.MapUtils;
 import com.orion.demo.orm.beansearcher.domain.User;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
-@Api(tags = "用户管理相关接口")
+@Tag(name = "用户测试", description = "测试用户")
 public class UserController {
 
     /**
@@ -35,10 +37,15 @@ public class UserController {
     @Autowired
     private BeanSearcher beanSearcher;
 
-    @GetMapping("list")
-    public Object testSelectList(User user, @ApiParam("要排序的字段名称") String sortField, @ApiParam("asc / desc") String order, Integer page, Integer size) {
+    @PostMapping("list")
+    @Operation(summary = "用户列表查询接口")
+    public Object testSelectList(@RequestBody User user,
+                                 @Parameter(description = "排序字段名") String sortField,
+                                 @Parameter(description = "排序方式（asc / desc）") String order,
+                                 @Parameter(description = "当前页码") Integer page,
+                                 @Parameter(description = "每页记录数") Integer size) {
         // 一行代码，实现一个用户检索接口（MapUtils.flat 只是收集前端的请求参数）
-        return this.mapSearcher.search(User.class, MapUtils.builder()
+        return mapSearcher.search(User.class, MapUtils.builder()
                 .onlySelect(User::getId, User::getUsername, User::getPhone, User::getTags, User::getProfile, User::getIdentity, User::getUserStatus, User::getCreateTime)
                 .field(User::getId, user.getId()).op(Equal.class)
                 .field(User::getUsername, user.getUsername()).op(Contain.class).ic(true)

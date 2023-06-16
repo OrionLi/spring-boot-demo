@@ -62,7 +62,7 @@ public class UserController {
     @GetMapping("list")
     public Object testSelectList(User user, @ApiParam("要排序的字段名称") String sortField, @ApiParam("asc / desc") String order, Integer page, Integer size) {
         // 一行代码，实现一个用户检索接口（MapUtils.flat 只是收集前端的请求参数）
-        return this.mapSearcher.search(User.class, MapUtils.builder()
+        return mapSearcher.search(User.class, MapUtils.builder()
                 // 接受可变长参数，这里写几个意思意思
                 .onlySelect(User::getId, User::getUsername, User::getPhone, User::getTags)
                 // field()写查询字段，op()写查询规则，ic()是要不要忽略大小写

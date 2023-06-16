@@ -17,12 +17,12 @@
 
 下面是一个简单的 Java 回调函数示例：
 
-```
+```java
 public class Worker {
     public void doWork(Callback callback) {
         // 模拟一些工作
         System.out.println("工作开始");
-        
+
         for (int i = 1; i <= 10; i++) {
             System.out.println(i);
             try {
@@ -31,7 +31,7 @@ public class Worker {
                 e.printStackTrace();
             }
         }
-        
+
         // 工作完成后，调用回调函数
         callback.onComplete();
     }
@@ -47,7 +47,7 @@ public interface Callback {
 
 下面是使用这个回调函数的示例代码：
 
-```
+```java
 public class Main {
     public static void main(String[] args) {
         Worker worker = new Worker();
@@ -70,7 +70,7 @@ public class Main {
 
 ### 理解异步操作
 
-下面是一个简单的使用 Spring 的 ListenableFuture 进行异步操作和回调的示例代码：
+下面是一个简单的使用 Spring 的 CompletableFuture 进行异步操作和回调的示例代码：
 
 ```java
 import org.springframework.util.concurrent.ListenableFuture;
@@ -78,6 +78,7 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.util.concurrent.ListenableFutureTask;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -85,7 +86,7 @@ public class Main {
     public static void main(String[] args) {
         ExecutorService executor = Executors.newFixedThreadPool(10);
 
-        ListenableFutureTask<String> futureTask = new ListenableFutureTask<>(new Callable<String>() {
+        CompletableFuture<String> futureTask = new CompletableFuture<>(new Callable<String>() {
             @Override
             public String call() throws Exception {
                 Thread.sleep(3000);  // 模拟耗时任务
@@ -93,14 +94,10 @@ public class Main {
             }
         });
 
-        futureTask.addCallback(new ListenableFutureCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
+        futureTask.whenComplete((result, ex) -> {
+            if (ex == null) {
                 System.out.println("操作成功，结果为：" + result);
-            }
-
-            @Override
-            public void onFailure(Throwable throwable) {
+            } else {
                 System.out.println("操作失败，原因为：" + throwable.getMessage());
             }
         });
@@ -112,29 +109,27 @@ public class Main {
 }
 ```
 
-在上面的代码中，我们首先创建了一个 `ExecutorService` 对象作为线程池。然后，创建了一个 `ListenableFutureTask`
+在上面的代码中，我们首先创建了一个 `ExecutorService` 对象作为线程池。然后，创建了一个 `CompletableFuture`
 对象
-> `ListenableFutureTask` 是 `ListenableFuture` 的实现类之一，它对 `FutureTask`
-> 做出了扩展，使得我们可以方便地添加回调。同时，由于底层的实现使用了 FutureTask，所以也具备了 Future 接口的特性。
 
-接下来，我们可以调用 `addCallback()` 方法向这个任务注册一个回调函数，当任务执行成功或发生异常时回调该函数。`onSuccess()`
-方法处理任务成功时的结果打印输出，而 `onFailure()` 方法打印输出任务执行失败时的异常信息。
+接下来，我们可以调用 `whenComplete()` 方法向这个任务注册一个回调函数，当任务执行成功或发生异常时回调该函数。`result`
+携带处理任务成功时的结果，而 `ex` 携带任务执行失败时的异常信息。
 
-最后，把`ListenableFutureTask`对象扔进线程池。主线程中会立即输出"正在等待结果..."，并不会有任何等待操作。当任务执行完成后回调函数将被自动调用，异步返回任务结果。
+最后，把`CompletableFuture`对象扔进线程池。主线程中会立即输出"正在等待结果..."，并不会有任何等待操作。当任务执行完成后回调函数将被自动调用，异步返回任务结果。
 
 在上面的示例代码中，方法执行顺序如下：
 
 1. 创建一个 `ExecutorService` 对象作为线程池，这个对象是同步创建的。
-2. 创建一个 `ListenableFutureTask` 对象，并传入一个匿名内部类 `Callable` 对象作为任务执行体，还没有开始执行任务。
-3. 给 `ListenableFutureTask` 对象注册回调方法，它是异步执行的，注册了回调函数后也不阻塞主线程。
-4. 将 `ListenableFutureTask` 对象提交到线程池中，这里会调用 `ExecutorService` 的 `submit()`
-   方法并将 `ListenableFutureTask` 作为参数，而`submit()` 方法会立即返回并继续执行下去，不阻塞主线程。任务在线程池中被开启，在后台新建线程中异步地执行
+2. 创建一个 `CompletableFuture` 对象，并传入一个匿名内部类 `Callable` 对象作为任务执行体，还没有开始执行任务。
+3. 给 `CompletableFuture` 对象注册回调方法，它是异步执行的，注册了回调函数后也不阻塞主线程。
+4. 将 `CompletableFuture` 对象提交到线程池中，这里会调用 `ExecutorService` 的 `submit()`
+   方法并将 `CompletableFuture` 作为参数，而`submit()` 方法会立即返回并继续执行下去，不阻塞主线程。任务在线程池中被开启，在后台新建线程中异步地执行
 5. 输出"正在等待结果..."，这一行代码直接运行在主线程中，而不需要等待任务执行完才输出。
-6. 当 `Callable` 对象的 call() 方法完成时，会将结果存储在 `ListenableFutureTask` 对象中，如果有回调函数，则它们会按照注册的顺序被自动调用。
-7. 如果任务出现了异常，那么 `onFailure()` 方法会被调用，否则 `onSuccess()` 被调用。
+6. 当 `Callable` 对象的 `call()` 方法完成时，会将结果存储在 `CompletableFuture` 对象中，如果有回调函数，则它们会按照注册的顺序被自动调用。
+7. 如果任务出现了异常，那么结果存放在 `ex`，否则存放在 `result` 。
 8. 主线程和后台线程都已经执行完成。
 
-总结起来，通过 ListenableFuture 对象使用 Spring
+总结起来，通过 CompletableFuture 对象使用 Spring
 的异步操作机制，能够非常方便地实现后台异步执行任务，并且在任务完成时回调相应的方法，这样就避免了阻塞主线程。同时，在不需要使用到回调功能的情况下，我们也可以直接使用 `Future`
 接口，并通过它来实现简单的异步操作。
 

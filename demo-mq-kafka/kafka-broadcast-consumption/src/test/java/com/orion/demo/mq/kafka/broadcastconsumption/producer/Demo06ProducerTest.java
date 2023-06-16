@@ -28,10 +28,14 @@ class Demo06ProducerTest {
     }
 
     @Test
-    public void testSyncSend() throws ExecutionException, InterruptedException {
+    public void testSyncSend() throws InterruptedException {
         int id = (int) (System.currentTimeMillis() / 1000);
-        SendResult result = this.producer.syncSend(id);
-        log.info("[testSyncSend][发送编号：[{}] 发送结果：[{}]]", id, result);
+        try {
+            SendResult result = producer.syncSend(id);
+            log.info("[testSyncSend][发送编号：[{}] 发送结果：[{}]]", id, result);
+        } catch (ExecutionException | InterruptedException e) {
+            log.error("[testASyncSend][发送编号：[{}] 发送异常]]", id, e);
+        }
 
         // 阻塞等待，保证消费
         new CountDownLatch(1).await();

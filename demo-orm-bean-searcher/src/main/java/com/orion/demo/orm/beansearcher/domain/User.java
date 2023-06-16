@@ -1,12 +1,9 @@
 package com.orion.demo.orm.beansearcher.domain;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -17,114 +14,75 @@ import java.time.LocalDateTime;
  * @author OrionLi
  * @TableName user
  */
+@Schema(description = "用户信息")
 @Data
 public class User implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 4710917672747757144L;
-    /**
-     *
-     */
-    @NotNull(message = "[]不能为空")
-    @ApiModelProperty("id")
+
+    @Schema(description = "用户ID")
     private Long id;
-    /**
-     * 昵称
-     */
+
+    @Schema(description = "昵称", maxLength = 16)
     @Size(max = 16, message = "编码长度不能超过16")
-    @ApiModelProperty("昵称")
-    @Length(max = 16, message = "编码长度不能超过16")
     private String username;
-    /**
-     * 账号
-     */
+
+    @Schema(description = "账号", maxLength = 32)
     @Size(max = 32, message = "编码长度不能超过32")
-    @ApiModelProperty("账号")
-    @Length(max = 32, message = "编码长度不能超过32")
     private String userAccount;
-    /**
-     * 在平台的唯一编号
-     */
+
+    @Schema(description = "在平台的唯一编号", maxLength = 64)
     @Size(max = 64, message = "编码长度不能超过64")
-    @ApiModelProperty("在平台的唯一编号")
-    @Length(max = 64, message = "编码长度不能超过64")
     private String platformCode;
-    /**
-     * 头像地址
-     */
-    @Size(max = 1024, message = "编码长度不能超过1024")
-    @ApiModelProperty("头像地址")
-    @Length(max = 1024, message = "编码长度不能超过1,024")
+
+    @Schema(description = "头像地址", maxLength = 1024)
+    @Size(max = 1024, message = "编码长度不能超过1,024")
     private String avatarUrl;
-    /**
-     * 性别
-     */
-    @ApiModelProperty("性别")
+
+    @Schema(description = "性别")
     private Integer gender;
-    /**
-     * 密码
-     */
-    @NotBlank(message = "[密码]不能为空")
+
+    @Schema(description = "密码", maxLength = 64)
     @Size(max = 64, message = "编码长度不能超过64")
-    @ApiModelProperty("密码")
-    @Length(max = 64, message = "编码长度不能超过64")
     private String userPassword;
-    /**
-     * 电话
-     */
+
+    @Schema(description = "电话", maxLength = 32)
     @Size(max = 32, message = "编码长度不能超过32")
-    @ApiModelProperty("电话")
-    @Length(max = 32, message = "编码长度不能超过32")
     private String phone;
-    /**
-     * 邮箱
-     */
+
+    @Schema(description = "邮箱", maxLength = 32)
     @Size(max = 32, message = "编码长度不能超过32")
-    @ApiModelProperty("邮箱")
-    @Length(max = 32, message = "编码长度不能超过32")
     private String email;
-    /**
-     * 标签列表，JSON格式
-     */
+
+    @Schema(description = "标签列表，JSON格式", maxLength = 256)
     @Size(max = 256, message = "编码长度不能超过256")
-    @ApiModelProperty("标签列表，JSON格式")
-    @Length(max = 256, message = "编码长度不能超过256")
     private String tags;
-    /**
-     * 个人简介
-     */
+
+    @Schema(description = "个人简介", maxLength = 512)
     @Size(max = 512, message = "编码长度不能超过512")
-    @ApiModelProperty("个人简介")
-    @Length(max = 512, message = "编码长度不能超过512")
     private String profile;
-    /**
-     * 用户身份：0-默认用户，1-管理员
-     */
-    @NotNull(message = "[用户身份：0-默认用户，1-管理员]不能为空")
-    @ApiModelProperty("用户身份：0-默认用户，1-管理员")
+
+    @Schema(description = "用户身份：0-默认用户，1-管理员", example = "0")
     private Integer identity;
     /**
      * 用户状态：0-正常
      */
-    @NotNull(message = "[用户状态：0-正常]不能为空")
-    @ApiModelProperty("用户状态：0-正常")
+    @Schema(description = "用户状态：0-正常")
     private Integer userStatus;
     /**
      * 创建时间
      */
-    @NotNull(message = "[创建时间]不能为空")
-    @ApiModelProperty("创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
     /**
      * 更新时间
      */
-    @NotNull(message = "[更新时间]不能为空")
-    @ApiModelProperty("更新时间")
+    @Schema(description = "更新时间")
     private LocalDateTime updateTime;
     /**
      * 删除状态：0-未删除，1-已删除
      */
-    @NotNull(message = "[删除状态：0-未删除，1-已删除]不能为空")
-    @ApiModelProperty("删除状态：0-未删除，1-已删除")
+    @Schema(description = "删除状态：0-未删除，1-已删除")
     private Integer isDeleted;
 }

@@ -1,11 +1,11 @@
 package com.orion.demo.mq.kafka.consumptionretry.producer;
 
 import com.orion.demo.mq.kafka.consumptionretry.message.Demo05Message;
+import jakarta.annotation.Resource;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -24,7 +24,7 @@ public class Demo05Producer {
         Demo05Message message = new Demo05Message();
         message.setId(id);
         // 同步发送消息
-        return this.kafkaTemplate.send(Demo05Message.TOPIC, message).get();
+        return kafkaTemplate.send(Demo05Message.TOPIC, message).get();
     }
 
 }

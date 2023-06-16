@@ -1,11 +1,11 @@
 package com.orion.demo.mq.kafka.broadcastconsumption.producer;
 
 import com.orion.demo.mq.kafka.broadcastconsumption.message.Demo06Message;
+import jakarta.annotation.Resource;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -24,6 +24,6 @@ public class Demo06Producer {
         Demo06Message message = new Demo06Message();
         message.setId(id);
         // 同步发送消息
-        return this.kafkaTemplate.send(Demo06Message.TOPIC, message).get();
+        return kafkaTemplate.send(Demo06Message.TOPIC, message).get();
     }
 }

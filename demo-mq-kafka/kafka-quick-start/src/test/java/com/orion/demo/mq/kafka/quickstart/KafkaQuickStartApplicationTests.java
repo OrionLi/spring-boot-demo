@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.core.KafkaProducerException;
-import org.springframework.kafka.core.KafkaSendCallback;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
-import org.springframework.util.concurrent.ListenableFuture;
+
+import java.util.concurrent.CompletableFuture;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -35,18 +35,13 @@ class KafkaQuickStartApplicationTests {
     public void sendMessageToKafka(ProducerRecord<String, String> record) {
 
         // 发送消息并添加回调函数
-        ListenableFuture<SendResult<String, String>> future = this.kafkaTemplate.send(record);
-        future.addCallback(new KafkaSendCallback<>() {
-
-            @Override
-            public void onSuccess(SendResult<String, String> result) {
+        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(record);
+        future.whenComplete((result, ex) -> {
+            if (ex == null) {
                 handleSuccess(record);
                 KafkaQuickStartApplicationTests.count++;
-            }
-
-            @Override
-            public void onFailure(KafkaProducerException ex) {
-                handleFailure(record, ex);
+            } else {
+                handleFailure(record, (KafkaProducerException) ex);
             }
         });
     }
@@ -67,7 +62,7 @@ class KafkaQuickStartApplicationTests {
      * @param ex     异常对象
      */
     public void handleFailure(ProducerRecord<String, String> record, KafkaProducerException ex) {
-        log.error("发送消息失败，ProducerRecord为：{}", record.toString(), ex);
+        log.error("发送消息失败，ProducerRecord为：{}，失败记录：{}", record.toString(), ex.getFailedProducerRecord());
     }
 
     // 修改后的测试方法
