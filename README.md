@@ -14,7 +14,7 @@
 |--------------------------------------------------------------------------|-------------|---------|
 | [MapStruct](https://mapstruct.org/documentation/stable/reference/html/)  | 1.5.5.Final | ✅       |
 | [Bean Searcher](https://bs.zhxu.cn/guide/latest/introduction.html)       | 4.2.0       | ✅       |
-| [Kafka](https://docs.spring.io/spring-kafka/docs/2.8.11/reference/html/) | 2.8.11      |         |
+| [Kafka](https://docs.spring.io/spring-kafka/docs/2.8.11/reference/html/) | 3.4.0       |         |
 | RocketMQ                                                                 |             |         |
 | Spring Cloud GateWay                                                     |             |         |
 | gRPC                                                                     |             |         |
