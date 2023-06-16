@@ -10,7 +10,7 @@
         <module>demo-mapping-mapstruct</module>
         <module>demo-orm-bean-searcher</module>
         <module>demo-mq-kafka</module>
-        <module>demo-rbac-shiro</module>
+        <module>demo-validation</module>
     </modules>
 
     <packaging>pom</packaging>

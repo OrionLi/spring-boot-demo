@@ -10,16 +10,16 @@
 
 当前项目概况：
 
-| 技术栈                                                                      | 版本          | demo 状态 |
-|--------------------------------------------------------------------------|-------------|---------|
-| [MapStruct](https://mapstruct.org/documentation/stable/reference/html/)  | 1.5.5.Final | ✅       |
-| [Bean Searcher](https://bs.zhxu.cn/guide/latest/introduction.html)       | 4.2.0       | ✅       |
-| [Kafka](https://docs.spring.io/spring-kafka/docs/2.8.11/reference/html/) | 3.4.0       |         |
-| RocketMQ                                                                 |             |         |
-| Spring Cloud GateWay                                                     |             |         |
-| gRPC                                                                     |             |         |
-| Nacos                                                                    |             |         |
-| Redission                                                                |             |         |
-| xxl-job                                                                  |             |         |
-| [Sa-Token](https://sa-token.cc/doc.html#/)                               |             |         |
-| Shiro                                                                    |             |         |
+| 技术栈                                                                                    | 版本          | demo 状态 |
+|----------------------------------------------------------------------------------------|-------------|---------|
+| [MapStruct](https://mapstruct.org/documentation/stable/reference/html/)                | 1.5.5.Final | ✅       |
+| [Bean Searcher](https://bs.zhxu.cn/guide/latest/introduction.html)                     | 4.2.0       | ✅       |
+| [Kafka](https://docs.spring.io/spring-kafka/docs/3.0.6/reference/html/#kafka-template) | 3.4.0       | ✅       |
+| Spring Validation                                                                      | 3.1.0       |         |
+| Nacos                                                                                  |             |         |
+| gRPC                                                                                   |             |         |
+| [Sa-Token](https://sa-token.cc/doc.html#/)                                             |             |         |
+| Spring Cloud GateWay                                                                   |             |         |
+| Redission                                                                              |             |         |
+| RocketMQ                                                                               |             |         |
+| xxl-job                                                                                |             |         |
