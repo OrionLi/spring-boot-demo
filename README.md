@@ -10,16 +10,15 @@
 
 当前项目概况：
 
-| 技术栈                                                                                    | 版本          | demo 状态 |
-|----------------------------------------------------------------------------------------|-------------|---------|
-| [MapStruct](https://mapstruct.org/documentation/stable/reference/html/)                | 1.5.5.Final | ✅       |
-| [Bean Searcher](https://bs.zhxu.cn/guide/latest/introduction.html)                     | 4.2.0       | ✅       |
-| [Kafka](https://docs.spring.io/spring-kafka/docs/3.0.6/reference/html/#kafka-template) | 3.4.0       | ✅       |
-| Spring Validation                                                                      | 3.1.0       |         |
-| Nacos                                                                                  |             |         |
-| gRPC                                                                                   |             |         |
-| [Sa-Token](https://sa-token.cc/doc.html#/)                                             |             |         |
-| Spring Cloud GateWay                                                                   |             |         |
-| Redission                                                                              |             |         |
-| RocketMQ                                                                               |             |         |
-| xxl-job                                                                                |             |         |
+| 模块 (链接跳转到本项目相应技术栈的README)                                  | 技术栈 (链接跳转到相应技术栈的官方文档)                                                                  | 版本          | demo 状态 |
+|------------------------------------------------------------|----------------------------------------------------------------------------------------|-------------|---------|
+| [demo-mapping-mapstruct](demo-mapping-mapstruct/README.md) | [MapStruct](https://mapstruct.org/documentation/stable/reference/html/)                | 1.5.5.Final | ✅       |
+| [demo-orm-bean-searcher](demo-orm-bean-searcher/README.md) | [Bean Searcher](https://bs.zhxu.cn/guide/latest/introduction.html)                     | 4.2.0       | ✅       |
+| [demo-mq-kafka](demo-mq-kafka/README.md)                   | [Kafka](https://docs.spring.io/spring-kafka/docs/3.0.6/reference/html/#kafka-template) | 3.4.0       | ✅       |
+| microservice                                               | Nacos                                                                                  |             |         |
+| microservice                                               | gRPC                                                                                   |             |         |
+| microservice                                               | Spring Cloud GateWay                                                                   |             |         |
+| microservice                                               | xxl-job                                                                                |             |         |
+|                                                            | [Sa-Token](https://sa-token.cc/doc.html#/)                                             |             |         |
+|                                                            | RocketMQ                                                                               |             |         |
+|                                                            | Redission                                                                              |             |         |
