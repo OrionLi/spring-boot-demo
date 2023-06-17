@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.orion.demo</groupId>
-        <artifactId>demo-microservice</artifactId>
+        <artifactId>demo-rpc-grpc</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>grpc-userservice-api</artifactId>

@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.orion.demo</groupId>
-        <artifactId>demo-microservice</artifactId>
+        <artifactId>demo-rpc-grpc</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>grpc-application</artifactId>
+    <artifactId>grpc-userservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>grpc-application</name>
-    <description>grpc-application</description>
+    <name>grpc-userservice</name>
+    <description>grpc-userservice</description>
     <dependencies>
         <!-- 引入 API 项目 -->
         <dependency>
@@ -19,10 +19,10 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-        <!-- 实现对 SpringMVC 的自动化配置 -->
+        <!-- 引入 Spring Boot 基础 Starter 依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
         <!-- 引入 gRPC Netty 依赖，因为使用它作为网络库 -->

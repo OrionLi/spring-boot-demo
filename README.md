@@ -15,10 +15,10 @@
 | [demo-mapping-mapstruct](demo-mapping-mapstruct/README.md) | [MapStruct](https://mapstruct.org/documentation/stable/reference/html/)                | 1.5.5.Final | ✅       |
 | [demo-orm-bean-searcher](demo-orm-bean-searcher/README.md) | [Bean Searcher](https://bs.zhxu.cn/guide/latest/introduction.html)                     | 4.2.0       | ✅       |
 | [demo-mq-kafka](demo-mq-kafka/README.md)                   | [Kafka](https://docs.spring.io/spring-kafka/docs/3.0.6/reference/html/#kafka-template) | 3.4.0       | ✅       |
-| demo-microservice                                          | Nacos                                                                                  |             |         |
-| demo-microservice                                          | gRPC                                                                                   |             |         |
-| demo-microservice                                          | Spring Cloud GateWay                                                                   |             |         |
-| demo-microservice                                          | xxl-job                                                                                |             |         |
+| demo-rpc-grpc                                              | Nacos                                                                                  |             |         |
+|                                                            | gRPC                                                                                   |             |         |
+|                                                            | Spring Cloud GateWay                                                                   |             |         |
+|                                                            | xxl-job                                                                                |             |         |
 |                                                            | [Sa-Token](https://sa-token.cc/doc.html#/)                                             |             |         |
 |                                                            | RocketMQ                                                                               |             |         |
 |                                                            | Redission                                                                              |             |         |
