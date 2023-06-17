@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.orion.demo</groupId>
+        <artifactId>demo-microservice</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>grpc-application</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>grpc-application</name>
+    <description>grpc-application</description>
+    <dependencies>
+        <!-- 引入 API 项目 -->
+        <dependency>
+            <groupId>com.orion.demo</groupId>
+            <artifactId>grpc-userservice-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!-- 实现对 SpringMVC 的自动化配置 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 引入 gRPC Netty 依赖，因为使用它作为网络库 -->
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty</artifactId>
+            <version>${io.grpc.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
