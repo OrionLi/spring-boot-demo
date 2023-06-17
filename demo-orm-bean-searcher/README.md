@@ -11,7 +11,10 @@
 
 # 运行本示例
 
-启动类：`com.orion.demo.orm.beansearcher.DemoOrmBeanSearcherApplication`
+本项目数据库使用 H2
+数据库，无需配置，直接运行[启动类](./src/main/java/com/orion/demo/orm/beansearcher/DemoOrmBeanSearcherApplication.java)
+即可。由于当 H2 数据库使用 `user` 作为表名时，会报 `expected "identifier"` (表名使用了关键字)，所以本 demo 项目类名 `User`
+改为 `UserInfo`，数据库表名变更为 `user_info` (当然，README 保持原样)
 
 接口文档：[http://localhost:8080/doc.html](http://localhost:8080/doc.html)
 

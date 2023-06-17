@@ -1,9 +1,20 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/user_center
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:~/demo-orm-bean-searcher
     username: root
     password: 123456
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:db/data.sql
+      schema-locations: classpath:db/schema.sql
+      username: root
+      password: 123456
 
 knife4j:
   enable: true

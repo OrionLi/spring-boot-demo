@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  */
 @Schema(description = "用户信息")
 @Data
-public class User implements Serializable {
+public class UserInfo implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 4710917672747757144L;

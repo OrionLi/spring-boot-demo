@@ -5,7 +5,7 @@ import cn.zhxu.bs.MapSearcher;
 import cn.zhxu.bs.operator.Contain;
 import cn.zhxu.bs.operator.Equal;
 import cn.zhxu.bs.util.MapUtils;
-import com.orion.demo.orm.beansearcher.domain.User;
+import com.orion.demo.orm.beansearcher.domain.UserInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,20 +39,20 @@ public class UserController {
 
     @PostMapping("list")
     @Operation(summary = "用户列表查询接口")
-    public Object testSelectList(@RequestBody User user,
+    public Object testSelectList(@RequestBody UserInfo userInfo,
                                  @Parameter(description = "排序字段名") String sortField,
                                  @Parameter(description = "排序方式（asc / desc）") String order,
                                  @Parameter(description = "当前页码") Integer page,
                                  @Parameter(description = "每页记录数") Integer size) {
         // 一行代码，实现一个用户检索接口（MapUtils.flat 只是收集前端的请求参数）
-        return mapSearcher.search(User.class, MapUtils.builder()
-                .onlySelect(User::getId, User::getUsername, User::getPhone, User::getTags, User::getProfile, User::getIdentity, User::getUserStatus, User::getCreateTime)
-                .field(User::getId, user.getId()).op(Equal.class)
-                .field(User::getUsername, user.getUsername()).op(Contain.class).ic(true)
-                .field(User::getPhone, user.getPhone()).op(Contain.class)
-                .field(User::getTags, user.getTags()).op(Contain.class).ic(true)
+        return mapSearcher.search(UserInfo.class, MapUtils.builder()
+                .onlySelect(UserInfo::getId, UserInfo::getUsername, UserInfo::getPhone, UserInfo::getTags, UserInfo::getProfile, UserInfo::getIdentity, UserInfo::getUserStatus, UserInfo::getCreateTime)
+                .field(UserInfo::getId, userInfo.getId()).op(Equal.class)
+                .field(UserInfo::getUsername, userInfo.getUsername()).op(Contain.class).ic(true)
+                .field(UserInfo::getPhone, userInfo.getPhone()).op(Contain.class)
+                .field(UserInfo::getTags, userInfo.getTags()).op(Contain.class).ic(true)
                 // https://bs.zhxu.cn/guide/latest/params.html#%E5%AD%97%E6%AE%B5%E8%A1%8D%E7%94%9F%E8%A7%84%E5%88%99
-                //.field(User::getCreateTime), entryDate_0, entryDate_1).op(规则)
+                //.field(UserInfo::getCreateTime), entryDate_0, entryDate_1).op(规则)
                 .orderBy(sortField, order)
                 .page(page != null ? page : 0, size != null ? size : 15)
                 .build()
