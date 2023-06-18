@@ -1,5 +1,3 @@
-# Kafka
-
 # Demo01 快速入门
 
 观看顺序：application.yml -> Message类 -> 提供者 -> 消费者`Demo01Consumer` -> 消费者`Demo01AConsumer`

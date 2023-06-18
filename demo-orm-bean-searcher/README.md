@@ -57,13 +57,13 @@
 public class UserController {
 
     /**
-     * 注入 Bean 检索器，它检索出来的数据以 泛型 对象呈现
+     * 注入 Map 检索器，它检索出来的数据以 Map 对象呈现
      */
     @Autowired
-    private BeanSearcher beanSearcher;
+    private MapSearcher mapSearcher;
 
     @GetMapping("list")
-    public Object testSelectList(User user, @ApiParam("要排序的字段名称") String sortField, @ApiParam("asc / desc") String order, Integer page, Integer size) {
+    public Map<String, Object> testSelectList(User user, @ApiParam("要排序的字段名称") String sortField, @ApiParam("asc / desc") String order, Integer page, Integer size) {
         // 一行代码，实现一个用户检索接口（MapUtils.flat 只是收集前端的请求参数）
         return mapSearcher.search(User.class, MapUtils.builder()
                 // 接受可变长参数，这里写几个意思意思
