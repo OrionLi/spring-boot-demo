@@ -1,6 +1,6 @@
 # Spring Boot Demo
 
-<img src="https://img.shields.io/badge/JDK-17.0.7-orange"> <img src="https://img.shields.io/badge/Spring%20Boot-3.0.7-brightgreen"> <img src="https://img.shields.io/badge/author-OrionLi-blue">
+<img src="https://img.shields.io/badge/JDK-17.0.7-orange"> <img src="https://img.shields.io/badge/Spring%20Boot-3.0.2-brightgreen"> <img src="https://img.shields.io/badge/author-OrionLi-blue">
 
 ## 项目介绍
 
@@ -14,7 +14,7 @@
 |------------------------------------------------------------|----------------------------------------------------------------------------------------|-------------|---------|
 | [demo-mapping-mapstruct](demo-mapping-mapstruct/README.md) | [MapStruct](https://mapstruct.org/documentation/stable/reference/html/)                | 1.5.5.Final | ✅       |
 | [demo-orm-bean-searcher](demo-orm-bean-searcher/README.md) | [Bean Searcher](https://bs.zhxu.cn/guide/latest/introduction.html)                     | 4.2.0       | ✅       |
-| [demo-mq-kafka](demo-mq-kafka/README.md)                   | [Kafka](https://docs.spring.io/spring-kafka/docs/3.0.6/reference/html/#kafka-template) | 3.4.0       | ✅       |
+| [demo-mq-kafka](demo-mq-kafka/README.md)                   | [Kafka](https://docs.spring.io/spring-kafka/docs/3.0.6/reference/html/#kafka-template) | 3.3.2       | ✅       |
 |                                                            | Nacos                                                                                  |             |         |
 | demo-rpc-grpc                                              | gRPC                                                                                   |             |         |
 |                                                            | Spring Cloud GateWay                                                                   |             |         |
