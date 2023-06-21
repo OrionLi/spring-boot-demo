@@ -27,24 +27,19 @@ public class GrpcConfig {
     @Autowired
     private NacosDiscoveryProperties discoveryProperties;
 
-
-    /**
-     * gRPC Server 随机端口
-     */
-    private static final Integer GRPC_PORT = 8098;
-
     @Bean
     public Server grpcServer(final UserServiceGrpcImpl userServiceGrpc) throws IOException {
         // 创建 gRPC Server 对象
         Server server = ServerBuilder
-                .forPort(GRPC_PORT)
+                // gRPC Server 随机端口
+                .forPort(0)
                 .addService(userServiceGrpc)
                 .build();
         // 启动 gRPC Server
         server.start();
         logger.info("[grpcServer][启动完成，端口为({})]", server.getPort());
         Map<String, String> metadata = new HashMap<>();
-        metadata.put("grpcPort", String.valueOf(server.getPort())); // 假设 gRPC 端口为 9090
+        metadata.put("grpcPort", String.valueOf(server.getPort()));
         discoveryProperties.setMetadata(metadata);
         return server;
     }
