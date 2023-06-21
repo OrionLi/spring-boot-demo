@@ -1,6 +1,6 @@
-package com.orion.demo.microservice.grpc.userservice.rpc;
+package com.orion.demo.grpc.userservice.rpc;
 
-import com.orion.demo.microservice.grpc.userservice.api.*;
+import com.orion.demo.grpc.userservice.api.*;
 import io.grpc.stub.StreamObserver;
 import org.springframework.stereotype.Service;
 

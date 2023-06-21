@@ -1,6 +1,6 @@
-package com.orion.demo.microservice.grpc.application.controller;
+package com.orion.demo.grpc.application.controller;
 
-import com.orion.demo.microservice.grpc.userservice.api.*;
+import com.orion.demo.grpc.userservice.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

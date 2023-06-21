@@ -10,8 +10,8 @@
     <artifactId>demo-rpc-grpc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>demo-microservice</name>
-    <description>demo-microservice</description>
+    <name>demo-rpc-grpc</name>
+    <description>demo-rpc-grpc</description>
 
     <properties>
         <!-- 依赖相关配置 -->

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: user-service # 应用名
+  cloud:
+    nacos:
+      # Nacos 作为注册中心的配置项，对应 NacosDiscoveryProperties 配置类
+      discovery:
+        server-addr: 127.0.0.1:8848 # Nacos 服务器地址
+    inetutils: # 忽略 VMWare的虚拟网卡
+      ignored-interfaces: 'VMware Virtual Ethernet Adapter for VMnet1,VMware Virtual Ethernet Adapter for VMnet8'
+server:
+  port: 0 # Web Server 随机端口
