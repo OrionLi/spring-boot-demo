@@ -25,7 +25,7 @@ spring:
         spring:
           json:
             trusted:
-              packages: com.orion.demo.mq.kafka.batchconsume.message
+              packages: com.orion.demo.kafka.batchconsume.message
     # Kafka Consumer Listener 监听器配置
     listener:
       type: BATCH # 监听器类型，默认为 SINGLE ，只监听单条消息。这里我们配置 BATCH ，监听多条消息，批量消费

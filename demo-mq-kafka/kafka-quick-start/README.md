@@ -133,7 +133,7 @@ public class Main {
 
 ### 更多 Kafka 异步调用示例
 
-在 `com.orion.demo.mq.kafka.quickstart.KafkaQuickStartApplicationTests` 处，有一个稍显完整的 Kafka 异步调用示例
+在 `com.orion.demo.kafka.quickstart.KafkaQuickStartApplicationTests` 处，有一个稍显完整的 Kafka 异步调用示例
 
 ## 消息 Message 是怎么序列化的。
 
