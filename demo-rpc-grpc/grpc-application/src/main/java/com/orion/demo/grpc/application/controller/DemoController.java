@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
 
     @Autowired
+    //@GrpcService(serviceName = "user-service")
     private UserServiceGrpc.UserServiceBlockingStub userServiceGrpc;
 
     @GetMapping("/get")

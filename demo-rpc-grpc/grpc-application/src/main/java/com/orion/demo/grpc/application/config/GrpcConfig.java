@@ -9,9 +9,12 @@ import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.orion.demo.grpc.userservice.api.UserServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.stub.AbstractBlockingStub;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.function.Function;
 
 /**
  * @author OrionLi
@@ -24,22 +27,24 @@ public class GrpcConfig {
     @Autowired
     private NacosDiscoveryProperties discoveryProperties;
 
-    @Bean
-    public ManagedChannel userGrpcManagedChannel() throws NacosException {
-        // 获取 user-service 服务的地址和端口
+    private ManagedChannel createManagedChannel(String serviceName) throws NacosException {
+        // 获取指定服务的地址和端口
         NamingService namingService = NamingFactory.createNamingService(discoveryProperties.getServerAddr());
-        Instance instance = namingService.selectOneHealthyInstance("user-service");
+        Instance instance = namingService.selectOneHealthyInstance(serviceName);
         String address = instance.getIp();
-        int port = this.getServiceGrpcPort(instance); // 获取 gRPC 端口号
+        int port = getServiceGrpcPort(instance); // 获取 gRPC 端口号
         return ManagedChannelBuilder.forAddress(address, port).usePlaintext().build();
+    }
+
+    public <T extends AbstractBlockingStub<T>> T createBlockingStub(String serviceName,
+                                                                    Function<ManagedChannel, T> stubFactory) throws NacosException {
+        ManagedChannel managedChannel = createManagedChannel(serviceName);
+        return stubFactory.apply(managedChannel);
     }
 
     @Bean
     public UserServiceGrpc.UserServiceBlockingStub userServiceGrpc() throws NacosException {
-        // 创建 ManagedChannel 对象
-        ManagedChannel userGrpcManagedChannel = this.userGrpcManagedChannel();
-        // 创建 UserServiceGrpc 对象
-        return UserServiceGrpc.newBlockingStub(userGrpcManagedChannel);
+        return createBlockingStub("user-service", UserServiceGrpc::newBlockingStub);
     }
 
     // 获取 Service 的元数据中的 gRPC 端口号
