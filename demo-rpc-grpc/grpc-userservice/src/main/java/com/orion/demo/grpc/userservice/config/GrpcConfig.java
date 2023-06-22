@@ -37,7 +37,7 @@ public class GrpcConfig {
                 .build();
         // 启动 gRPC Server
         server.start();
-        logger.info("[grpcServer][启动完成，端口为({})]", server.getPort());
+        logger.info("[grpcServer][启动完成，gRPC端口为({})]", server.getPort());
         Map<String, String> metadata = new HashMap<>();
         metadata.put("grpcPort", String.valueOf(server.getPort()));
         discoveryProperties.setMetadata(metadata);

@@ -13,6 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @author OrionLi
+ * @date 2023/6/17 20:40
+ * @description GrpcConfig
+ */
 @Configuration
 public class GrpcConfig {
 
@@ -25,7 +30,7 @@ public class GrpcConfig {
         NamingService namingService = NamingFactory.createNamingService(discoveryProperties.getServerAddr());
         Instance instance = namingService.selectOneHealthyInstance("user-service");
         String address = instance.getIp();
-        int port = this.getUserServiceGrpcPort(instance); // 获取 gRPC 端口号
+        int port = this.getServiceGrpcPort(instance); // 获取 gRPC 端口号
         return ManagedChannelBuilder.forAddress(address, port).usePlaintext().build();
     }
 
@@ -37,12 +42,12 @@ public class GrpcConfig {
         return UserServiceGrpc.newBlockingStub(userGrpcManagedChannel);
     }
 
-    // 获取 UserService 的元数据中的 gRPC 端口号
-    private int getUserServiceGrpcPort(Instance instance) {
+    // 获取 Service 的元数据中的 gRPC 端口号
+    private int getServiceGrpcPort(Instance instance) {
         String grpcPort = instance.getMetadata().get("grpcPort");
         if (StringUtils.isEmpty(grpcPort)) {
             // 当元数据中不存在 grpcPort 时，抛出异常
-            throw new RuntimeException("No grpcPort in user-service metadata.");
+            throw new RuntimeException("No grpcPort in service metadata.");
         }
         return Integer.parseInt(grpcPort);
     }

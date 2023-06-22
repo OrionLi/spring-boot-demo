@@ -11,6 +11,7 @@
         <module>demo-orm-bean-searcher</module>
         <module>demo-mq-kafka</module>
         <module>demo-validation</module>
+        <module>demo-rpc-grpc</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -85,6 +86,12 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+            <!-- 假数据工具类 -->
+            <dependency>
+                <groupId>com.github.javafaker</groupId>
+                <artifactId>javafaker</artifactId>
+                <version>1.0.2</version>
             </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
