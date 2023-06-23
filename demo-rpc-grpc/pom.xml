@@ -16,7 +16,6 @@
     <properties>
         <!-- 依赖相关配置 -->
         <io.grpc.version>1.55.1</io.grpc.version>
-        <net.devh.version>2.14.0.RELEASE</net.devh.version>
     </properties>
     <modules>
         <module>grpc-userservice-api</module>
