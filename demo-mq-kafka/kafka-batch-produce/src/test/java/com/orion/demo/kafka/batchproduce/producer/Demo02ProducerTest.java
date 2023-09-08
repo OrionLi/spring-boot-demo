@@ -43,7 +43,7 @@ public class Demo02ProducerTest {
                 }
             });
 
-            // 故意每条消息之间，隔离 10 秒
+            // 故意每条消息之间，隔离 1 秒
             Thread.sleep(1000L);
         }
 
