@@ -3,9 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.orion.demo</groupId>
-        <artifactId>spring-boot-demo</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>demo-rpc-grpc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -15,12 +16,12 @@
 
     <properties>
         <!-- 依赖相关配置 -->
-        <io.grpc.version>1.57.2</io.grpc.version>
+        <grpc.version>1.59.1</grpc.version>
+        <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
     </properties>
     <modules>
         <module>grpc-userservice-api</module>
         <module>grpc-userservice</module>
         <module>grpc-application</module>
     </modules>
-
 </project>

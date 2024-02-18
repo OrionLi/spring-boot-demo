@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.orion.demo</groupId>
+        <groupId>org.springframework.boot</groupId>
         <artifactId>demo-rpc-grpc</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -22,13 +22,13 @@
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-protobuf</artifactId>
-            <version>${io.grpc.version}</version>
+            <version>${grpc.version}</version>
         </dependency>
         <!-- 引入 gRPC Stub 依赖，因为使用它作为 gRPC 客户端库 -->
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-stub</artifactId>
-            <version>${io.grpc.version}</version>
+            <version>${grpc.version}</version>
         </dependency>
         <!-- maven compile 需要这个 -->
         <dependency>
@@ -56,7 +56,7 @@
                 <configuration>
                     <pluginId>grpc-java</pluginId>
                     <protocArtifact>com.google.protobuf:protoc:3.9.1:exe:${os.detected.classifier}</protocArtifact>
-                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${io.grpc.version}:exe:${os.detected.classifier}
+                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
                     </pluginArtifact>
                 </configuration>
                 <executions>

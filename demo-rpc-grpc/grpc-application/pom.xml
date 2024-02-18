@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.orion.demo</groupId>
+        <groupId>org.springframework.boot</groupId>
         <artifactId>demo-rpc-grpc</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -14,7 +14,7 @@
     <dependencies>
         <!-- 引入 API 项目 -->
         <dependency>
-            <groupId>com.orion.demo</groupId>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>grpc-userservice-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
@@ -29,13 +29,14 @@
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-netty</artifactId>
-            <version>${io.grpc.version}</version>
+            <version>${grpc.version}</version>
         </dependency>
 
         <!-- 引入 Spring Cloud Alibaba Nacos Discovery 相关依赖，将 Nacos 作为注册中心，并实现对其的自动配置 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>${spring-cloud-alibaba.version}</version>
         </dependency>
     </dependencies>
 

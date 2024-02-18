@@ -3,16 +3,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.orion.demo</groupId>
-        <artifactId>spring-boot-demo</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>demo-liteflow</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>demo-liteflow</name>
     <description>demo-liteflow</description>
     <properties>
-        <liteflow.version>2.11.0</liteflow.version>
+        <liteflow.version>2.11.3</liteflow.version>
     </properties>
     <dependencies>
         <dependency>

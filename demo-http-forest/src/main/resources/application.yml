@@ -1,0 +1,7 @@
+forest:
+  timeout: 3333
+  log-enabled: true
+  log-response-content: true
+  backend: okhttp3
+  variables:
+    idServiceUrl: https://www.12306.cn

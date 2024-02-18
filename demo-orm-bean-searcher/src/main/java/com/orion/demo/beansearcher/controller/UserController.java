@@ -4,16 +4,11 @@ import cn.zhxu.bs.BeanSearcher;
 import cn.zhxu.bs.MapSearcher;
 import cn.zhxu.bs.operator.Contain;
 import cn.zhxu.bs.operator.Equal;
+import cn.zhxu.bs.param.OrderBy;
 import cn.zhxu.bs.util.MapUtils;
 import com.orion.demo.beansearcher.domain.UserInfo;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author OrionLi
@@ -23,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
-@Tag(name = "用户测试", description = "测试用户")
 public class UserController {
 
     /**
@@ -38,14 +32,9 @@ public class UserController {
     private BeanSearcher beanSearcher;
 
     @PostMapping("list")
-    @Operation(summary = "用户列表查询接口")
-    public Object testSelectList(@RequestBody UserInfo userInfo,
-                                 @Parameter(description = "排序字段名") String sortField,
-                                 @Parameter(description = "排序方式（asc / desc）") String order,
-                                 @Parameter(description = "当前页码") Integer page,
-                                 @Parameter(description = "每页记录数") Integer size) {
+    public Object testSelectList(@RequestBody UserInfo userInfo, Integer page, Integer size) {
         // 一行代码，实现一个用户检索接口（MapUtils.flat 只是收集前端的请求参数）
-        return mapSearcher.search(UserInfo.class, MapUtils.builder()
+        return beanSearcher.search(UserInfo.class, MapUtils.builder()
                 .onlySelect(UserInfo::getId, UserInfo::getUsername, UserInfo::getPhone, UserInfo::getTags, UserInfo::getProfile, UserInfo::getIdentity, UserInfo::getUserStatus, UserInfo::getCreateTime)
                 .field(UserInfo::getId, userInfo.getId()).op(Equal.class)
                 .field(UserInfo::getUsername, userInfo.getUsername()).op(Contain.class).ic(true)
@@ -53,9 +42,14 @@ public class UserController {
                 .field(UserInfo::getTags, userInfo.getTags()).op(Contain.class).ic(true)
                 // https://bs.zhxu.cn/guide/latest/params.html#%E5%AD%97%E6%AE%B5%E8%A1%8D%E7%94%9F%E8%A7%84%E5%88%99
                 //.field(UserInfo::getCreateTime), entryDate_0, entryDate_1).op(规则)
-                .orderBy(sortField, order)
+                .orderBy(UserInfo::getId, OrderBy.ORDER_ASC)
                 .page(page != null ? page : 0, size != null ? size : 15)
                 .build()
         );
+    }
+
+    @GetMapping
+    public Object testGetAll() {
+        return beanSearcher.searchAll(UserInfo.class);
     }
 }
