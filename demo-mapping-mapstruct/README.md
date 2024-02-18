@@ -8,47 +8,105 @@ MapStruct 可用于 Java 9 及更高版本，本项目使用 Java 17 构建
 
 基于 MapStruct 的示例代码在 `com.orion.demo.mapping.mapstruct.mapping` 的 `CarMapperTest` 类中
 
-当同时使用 Lombok 和 MapStruct 时，请在 pom.xml 中添加
+# 同时使用 Lombok 和 MapStruct
 
-请注意，在`build.plugins.plugin.configuration.annotationProcessorPaths.path`
-中，指定的版本是必须要写的。默认情况下，Maven不会从父模块继承插件版本号。你需要确保你的模块或者父模块的`properties`
-标签指定了lombok版本，并且在子模块对应`build.plugins.plugin.configuration`
-内lombok下加上`<version>${lombok.version}</version>`
+> [pom.xml 配置参考](https://stackoverflow.com/a/77908937)
+
+1. 首先在 pom.xml 中添加 mapstruct 依赖项。
 
 ```xml
 
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <annotationProcessorPaths>
-                    <!-- Lombok 在编译时会通过这个插件生成代码 -->
-                    <path>
-                        <groupId>org.projectlombok</groupId>
-                        <artifactId>lombok</artifactId>
-                        <version>${lombok.version}</version>
-                    </path>
-                    <!-- MapStruct 在编译时会通过这个插件生成代码 -->
-                    <path>
-                        <groupId>org.mapstruct</groupId>
-                        <artifactId>mapstruct-processor</artifactId>
-                        <version>${org.mapstruct.version}</version>
-                    </path>
-                </annotationProcessorPaths>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
+<properties>
+    <java.version>17</java.version>
+    <mapstruct.version>1.6.0.Beta1</mapstruct.version>
+</properties>
+<dependencies>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+</dependency>
+
+<dependency>
+    <groupId>org.mapstruct</groupId>
+    <artifactId>mapstruct</artifactId>
+    <version>${mapstruct.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <scope>provided</scope>
+</dependency>
+</dependencies>
 ```
 
-同时，SpringBoot 项目使用 MapStruct 写的接口时，如果要用依赖注入的方式使用接口的实现类，MapStruct的映射接口的 `@Mapper`
-注解应改为 `@Mapper(componentModel = "spring")`
+注意: 确保为 lombok 设置 `<scope>provided</scope>` 。没有这个 `@Builder` 不起作用。
+
+由于 mapstruct 需要进行注释处理，因此我们需要将插件添加到我们的 `pom.xml` 中。
+
+```xml
+
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <configuration>
+        <annotationProcessorPaths>
+            <path>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+            </path>
+            <path>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-mapstruct-binding</artifactId>
+                <version>0.2.0</version>
+            </path>
+            <path>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </path>
+        </annotationProcessorPaths>
+    </configuration>
+</plugin>
+```
+
+注意: Lombok 和 Mapstruct 需要 ``lombok-mapstruct-binding`` ，以允许它们合作。
+
+确保在IDE中启用了注释处理。您可以检查IntelliJ Idea和Eclipse/STS的这些链接
+
+完成后，您可以创建 mapper interface 。
+
+```java
+import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
+
+@Mapper(componentModel = SPRING)
+public interface UserMapper {
+    UserModel dtoToModel(UserDTO userDto);
+}
+```
+
+然后 mapper 可以很容易地 @Autowired 。
+
+```java
+
+@Service
+public class UserService {
+
+    private final UserMapper userMapper;
+
+    @Autowired
+    public UserService(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
+
+    // Business logic
+}
+```
 
 如果还是出错，运行一次 maven 的 clean
 
